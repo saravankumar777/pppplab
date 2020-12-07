@@ -1,1 +1,40 @@
-
+pipeline {
+    agent { label 'Java' }
+    stages { 
+        stage ("SCM Checkin-1") {
+            steps {
+                script {
+                    if( !fileExists('JAGD')) {
+                        stage ('stage 1') {
+                            // Create all folders up-to and including B
+                            sh "mkdir JAGD"
+                        }
+                    }
+                    if( !fileExists('samplemaven')) {
+                        stage ('stage 2') {
+                            // Create all folders up-to and including B
+                            sh "mkdir samplemaven"
+                        }
+                    }
+                }
+                dir("samplemaven") {
+                    git branch: 'master', url: 'https://github.com/saravankumar777/SampleMaven'
+                } 
+                dir("JAGD") {
+                   git branch: 'main', credentialsId: '9d4f11c2-0f02-4d62-b157-4bd51a51106e', url: 'https://github.com/saravankumar777/PP-Lab'
+                }
+            }
+        }
+        stage ("maven build") {
+            tools {
+                maven 'maven3.5.2'
+                jdk 'JDK1.8'
+            }
+            steps {
+                dir("samplemaven") {
+                    sh "mvn package"
+                }
+            }
+       }
+     }
+   }
