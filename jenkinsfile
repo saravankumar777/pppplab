@@ -21,7 +21,7 @@ pipeline {
                     git branch: 'master', url: 'https://github.com/saravankumar777/SampleMaven'
                 } 
                 dir("JAGD") {
-                   git branch: 'main', credentialsId: '9d4f11c2-0f02-4d62-b157-4bd51a51106e', url: 'https://github.com/saravankumar777/PP-Lab'
+                   git branch: 'main', credentialsId: 'f112b984-9ab4-468d-abf9-bb52ce1b0902', url: 'https://github.com/saravankumar777/pppplab'
                 }
             }
         }
